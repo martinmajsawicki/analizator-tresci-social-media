@@ -1,0 +1,40 @@
+# Klucze API i konfiguracja lokalna
+.env
+.env.*
+
+# Środowisko wirtualne
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Logi
+logs/
+*.log
+
+# Wyniki analiz (lokalne)
+output/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Claude Code
+.claude/
+
+# Pliki robocze (przykładowe materiały)
+*.pdf
+posts/
+
+# Notatki robocze
+BAŃKA ROBOTYCZNA.txt
+FUNDACJA_RONALDAMCDONALDA.txt
+WPIS O ROBOTACH.txt
+WPIS_KAROLA_DO_OCENY.txt
