@@ -32,3 +32,7 @@ output/
 # Pliki robocze (przykładowe materiały)
 *.pdf
 posts/
+
+# Prywatne notatki (*.txt w głównym katalogu, oprócz requirements.txt)
+/*.txt
+!requirements.txt

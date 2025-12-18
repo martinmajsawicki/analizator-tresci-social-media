@@ -11,6 +11,22 @@ System agentowy AI do tworzenia treści social media - od eksploracji tematu po 
 
 ---
 
+## Wymagania systemowe
+
+Przed instalacją upewnij się, że masz:
+
+| Wymaganie | Wersja | Jak sprawdzić | Jak zainstalować |
+|-----------|--------|---------------|------------------|
+| **Python** | 3.10+ | `python3 --version` | [python.org](https://www.python.org/downloads/) |
+| **pip** | (dowolna) | `pip --version` | Instaluje się z Pythonem |
+| **Git** | (dowolna) | `git --version` | [git-scm.com](https://git-scm.com/) |
+
+> **macOS**: Python 3 możesz zainstalować przez Homebrew: `brew install python`
+>
+> **Windows**: Pobierz instalator z python.org, zaznacz "Add to PATH"
+
+---
+
 ## Instalacja
 
 ### 1. Sklonuj repozytorium

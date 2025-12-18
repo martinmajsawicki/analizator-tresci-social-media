@@ -1,5 +1,8 @@
 # Social Media Analyzer dependencies
 
+# OpenAI SDK (używane do OpenRouter API)
+openai>=1.0.0
+
 # API & HTTP
 requests>=2.31.0
 httpx>=0.25.0
