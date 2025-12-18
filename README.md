@@ -51,27 +51,22 @@ pip install -r requirements.txt
 
 ### 4. Skonfiguruj klucz API
 
-Utwórz plik `.env` w głównym katalogu. Potrzebujesz **przynajmniej jednego** klucza:
+Skopiuj plik przykładowy i uzupełnij swoje klucze:
 
-**Opcja A: OpenRouter (uniwersalny - obsługuje wszystkie modele)**
 ```bash
-echo "OPENROUTER_API_KEY=sk-or-v1-twój-klucz" > .env
-```
-Klucz uzyskasz na: https://openrouter.ai
-
-**Opcja B: Natywne API (bezpośrednio do dostawców)**
-```bash
-# Claude (Anthropic)
-ANTHROPIC_API_KEY=sk-ant-xxx
-
-# GPT (OpenAI)
-OPENAI_API_KEY=sk-xxx
-
-# Gemini (Google)
-GOOGLE_API_KEY=AIzaxxx
+cp .env.example .env
 ```
 
-> **Priorytet:** Jeśli masz zarówno klucz natywny jak i OpenRouter, system automatycznie wybierze natywne API dla danego modelu (szybsze, bez pośrednika).
+Następnie otwórz `.env` w edytorze i wklej **przynajmniej jeden** klucz API:
+
+| Klucz | Gdzie uzyskać | Obsługuje |
+|-------|---------------|-----------|
+| `OPENROUTER_API_KEY` | [openrouter.ai/keys](https://openrouter.ai/keys) | Wszystkie modele |
+| `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com/) | Claude |
+| `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com/api-keys) | GPT |
+| `GOOGLE_API_KEY` | [aistudio.google.com](https://aistudio.google.com/apikey) | Gemini |
+
+> **Tip:** OpenRouter to najprostszy start - jeden klucz do wszystkich modeli. Natywne klucze są szybsze (bez pośrednika).
 
 ---
 

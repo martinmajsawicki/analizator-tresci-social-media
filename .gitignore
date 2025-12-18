@@ -1,6 +1,7 @@
 # Klucze API i konfiguracja lokalna
 .env
 .env.*
+!.env.example
 
 # Środowisko wirtualne
 venv/
