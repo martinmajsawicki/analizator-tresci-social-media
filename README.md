@@ -4,7 +4,10 @@ System agentowy do pracy z treściami dla social media - od eksploracji tematu p
 
 ## Dla kogo
 
-**Marcin Majsawicki** - dziennikarz z 30-letnim doświadczeniem, konsultant AI/LLM, współzałożyciel Szkoły Promptowania.
+- **Twórcy treści** - copywriterzy, content creatorzy, social media managerowie
+- **Dziennikarze i publicyści** - piszący na LinkedIn, blogi, newslettery
+- **Eksperci budujący markę osobistą** - dzielący się wiedzą w social media
+- **Producenci wideo** - potrzebujący tekstowych scenariuszy do Reels/Shorts
 
 ## Problem
 
