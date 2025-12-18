@@ -11,93 +11,266 @@ System agentowy AI do tworzenia treści social media - od eksploracji tematu po 
 
 ---
 
-## Wymagania systemowe
+# Instalacja krok po kroku
 
-Przed instalacją upewnij się, że masz:
+## Krok 1: Otwórz Terminal
 
-| Wymaganie | Wersja | Jak sprawdzić | Jak zainstalować |
-|-----------|--------|---------------|------------------|
-| **Python** | 3.10+ | `python3 --version` | [python.org](https://www.python.org/downloads/) |
-| **pip** | (dowolna) | `pip --version` | Instaluje się z Pythonem |
-| **Git** | (dowolna) | `git --version` | [git-scm.com](https://git-scm.com/) |
+**macOS:**
+1. Naciśnij `Cmd + Spacja` (otworzy się Spotlight)
+2. Wpisz `Terminal`
+3. Naciśnij `Enter`
 
-> **macOS**: Python 3 możesz zainstalować przez Homebrew: `brew install python`
->
-> **Windows**: Pobierz instalator z python.org, zaznacz "Add to PATH"
+**Windows:**
+1. Naciśnij `Win + R`
+2. Wpisz `cmd`
+3. Naciśnij `Enter`
+
+> Terminal to czarne okno, w którym wpisujesz komendy tekstowe. Każdą komendę zatwierdzasz klawiszem `Enter`.
 
 ---
 
-## Instalacja
+## Krok 2: Sprawdź czy masz Pythona
 
-### 1. Sklonuj repozytorium
+Wpisz w terminalu:
+
+```bash
+python3 --version
+```
+
+**Jeśli widzisz** coś jak `Python 3.10.0` lub wyższą wersję - masz Pythona, przejdź do kroku 3.
+
+**Jeśli widzisz błąd** "command not found" lub "nie rozpoznano polecenia" - musisz zainstalować Pythona:
+
+### Instalacja Pythona na macOS:
+
+1. Wejdź na https://www.python.org/downloads/
+2. Kliknij żółty przycisk "Download Python 3.x.x"
+3. Otwórz pobrany plik `.pkg`
+4. Klikaj "Kontynuuj" / "Continue" aż do końca instalacji
+5. Zamknij i otwórz Terminal ponownie
+6. Sprawdź jeszcze raz: `python3 --version`
+
+### Instalacja Pythona na Windows:
+
+1. Wejdź na https://www.python.org/downloads/
+2. Kliknij żółty przycisk "Download Python 3.x.x"
+3. Otwórz pobrany plik `.exe`
+4. **WAŻNE:** Zaznacz checkbox "Add Python to PATH" na dole okna!
+5. Kliknij "Install Now"
+6. Zamknij i otwórz cmd ponownie
+7. Sprawdź: `python --version` (bez "3" na Windows)
+
+---
+
+## Krok 3: Sprawdź czy masz Git
+
+Wpisz w terminalu:
+
+```bash
+git --version
+```
+
+**Jeśli widzisz** coś jak `git version 2.x.x` - masz Git, przejdź do kroku 4.
+
+**Jeśli widzisz błąd** - zainstaluj Git:
+
+### Instalacja Git na macOS:
+
+Wpisz w terminalu:
+```bash
+xcode-select --install
+```
+Pojawi się okno - kliknij "Zainstaluj" i poczekaj.
+
+### Instalacja Git na Windows:
+
+1. Wejdź na https://git-scm.com/download/win
+2. Pobierz i uruchom instalator
+3. Klikaj "Next" używając domyślnych opcji
+4. Zamknij i otwórz cmd ponownie
+
+---
+
+## Krok 4: Pobierz projekt
+
+Wpisz w terminalu (skopiuj całość i wklej):
 
 ```bash
 git clone https://github.com/martinmajsawicki/analizator-tresci-social-media.git
+```
+
+> Ta komenda pobiera projekt z internetu na Twój komputer.
+
+**Co powinieneś zobaczyć:**
+```
+Cloning into 'analizator-tresci-social-media'...
+remote: Enumerating objects: ...
+Receiving objects: 100% ...
+```
+
+---
+
+## Krok 5: Wejdź do folderu projektu
+
+Wpisz:
+
+```bash
 cd analizator-tresci-social-media
 ```
 
-### 2. Utwórz środowisko wirtualne
+> `cd` znaczy "change directory" - wchodzisz do folderu.
 
+**Sprawdź czy jesteś w dobrym miejscu:**
+```bash
+ls
+```
+
+**Powinieneś zobaczyć pliki** jak `app.py`, `start.sh`, `requirements.txt` itd.
+
+---
+
+## Krok 6: Utwórz środowisko wirtualne
+
+Wpisz:
+
+**macOS:**
 ```bash
 python3 -m venv venv
 ```
 
-### 3. Zainstaluj zależności
+**Windows:**
+```bash
+python -m venv venv
+```
 
+> Ta komenda tworzy folder `venv` z izolowanym środowiskiem Pythona. Nic się nie wyświetli - to normalne.
+
+---
+
+## Krok 7: Aktywuj środowisko wirtualne
+
+**macOS:**
 ```bash
 source venv/bin/activate
+```
+
+**Windows:**
+```bash
+venv\Scripts\activate
+```
+
+**Skąd wiesz, że zadziałało?** Na początku linii terminala pojawi się `(venv)`:
+```
+(venv) twoja-nazwa@komputer:~/analizator-tresci-social-media$
+```
+
+---
+
+## Krok 8: Zainstaluj zależności
+
+Wpisz:
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 4. Skonfiguruj klucz API
+> Ta komenda instaluje wszystkie biblioteki potrzebne do działania programu.
 
-Skopiuj plik przykładowy i uzupełnij swoje klucze:
+**Co zobaczysz:** Długa lista instalowanych pakietów. Poczekaj aż skończy się na:
+```
+Successfully installed ...
+```
 
+---
+
+## Krok 9: Skonfiguruj klucz API
+
+### 9a. Skopiuj plik przykładowy:
+
+**macOS:**
 ```bash
 cp .env.example .env
 ```
 
-Następnie otwórz `.env` w edytorze i wklej **przynajmniej jeden** klucz API:
+**Windows:**
+```bash
+copy .env.example .env
+```
 
-| Klucz | Gdzie uzyskać | Obsługuje |
-|-------|---------------|-----------|
-| `OPENROUTER_API_KEY` | [openrouter.ai/keys](https://openrouter.ai/keys) | Wszystkie modele |
-| `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com/) | Claude |
-| `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com/api-keys) | GPT |
-| `GOOGLE_API_KEY` | [aistudio.google.com](https://aistudio.google.com/apikey) | Gemini |
+### 9b. Otwórz plik .env w edytorze:
 
-> **Tip:** OpenRouter to najprostszy start - jeden klucz do wszystkich modeli. Natywne klucze są szybsze (bez pośrednika).
+**macOS:**
+```bash
+open -e .env
+```
+
+**Windows:**
+```bash
+notepad .env
+```
+
+### 9c. Uzyskaj klucz API:
+
+Najprostszy sposób - OpenRouter (jeden klucz do wszystkich modeli AI):
+
+1. Wejdź na https://openrouter.ai
+2. Kliknij "Sign In" (prawy górny róg)
+3. Zaloguj się przez Google lub utwórz konto
+4. Po zalogowaniu kliknij swoje zdjęcie → "Keys"
+5. Kliknij "Create Key"
+6. Skopiuj klucz (zaczyna się od `sk-or-v1-...`)
+
+### 9d. Wklej klucz do pliku .env:
+
+W pliku `.env` znajdź linię:
+```
+OPENROUTER_API_KEY=
+```
+
+Wklej swój klucz po znaku `=` (bez spacji):
+```
+OPENROUTER_API_KEY=sk-or-v1-tutaj-twój-klucz
+```
+
+**Zapisz plik** (`Cmd+S` na macOS, `Ctrl+S` na Windows) i zamknij edytor.
 
 ---
 
-## Uruchomienie (GUI)
+## Krok 10: Uruchom aplikację
 
-**Jedna komenda:**
-
+**macOS:**
 ```bash
 ./start.sh
 ```
 
-Otworzy się przeglądarka z interfejsem Streamlit.
+Jeśli pojawi się błąd "permission denied":
+```bash
+chmod +x start.sh
+./start.sh
+```
 
-> Jeśli skrypt nie działa, uruchom ręcznie:
-> ```bash
-> source venv/bin/activate && streamlit run app.py
-> ```
+**Windows:**
+```bash
+streamlit run app.py
+```
+
+**Co się stanie:** Otworzy się przeglądarka z interfejsem aplikacji.
+
+Jeśli przeglądarka się nie otworzy, skopiuj adres z terminala (np. `http://localhost:8501`) i wklej go w przeglądarkę.
 
 ---
 
-## Jak to działa
+# Jak używać aplikacji
 
-### 3 tryby pracy
+## 3 tryby pracy
 
 | Tryb | Kiedy używać | Co dostajesz |
 |------|--------------|--------------|
-| 🔭 **EKSPLORACJA** | Mam materiał, nie mam pomysłu | Kąty, perspektywy, pytania, hooki |
-| 🛠️ **ROZWINIĘCIE** | Mam materiał + wstępny kierunek | Warianty, hooki, kontrargumenty |
-| 💎 **SZLIF** | Mam gotowy tekst | Ocenę, poprawki, ulepszoną wersję |
+| **EKSPLORACJA** | Mam materiał, nie mam pomysłu | Kąty, perspektywy, pytania, hooki |
+| **ROZWINIĘCIE** | Mam materiał + wstępny kierunek | Warianty, hooki, kontrargumenty |
+| **SZLIF** | Mam gotowy tekst | Ocenę, poprawki, ulepszoną wersję |
 
-### Wspierane platformy
+## Wspierane platformy
 
 - **LinkedIn** - posty tekstowe
 - **Facebook** - posty tekstowe
@@ -106,162 +279,107 @@ Otworzy się przeglądarka z interfejsem Streamlit.
 
 ---
 
-## Agenci
+# Następne uruchomienia
 
-System wykorzystuje wyspecjalizowanych agentów AI. Każdy ma szczegółowe instrukcje (prompty) określające jego rolę.
+Gdy chcesz ponownie uruchomić aplikację (po restarcie komputera):
 
-### Agenci analityczni
-
-| Agent | Plik | Zadanie |
-|-------|------|---------|
-| **Ekstraktor** | `agents/extractor.py` | Wyciąga ze źródła: cytaty, osoby, liczby, metafory. Oznacza soundbite'y. |
-| **Łowca Rezonansu** | `agents/resonance_hunter.py` | Szuka punktów zaczepienia - co rezonuje z odbiorcą, co budzi emocje. |
-| **Antropolog** | `agents/anthropologist.py` | Trzy perspektywy: etnografia (sceny, rytuały), socjologia (podziały), psychologia (emocje). |
-| **Polski Kontekstualizator** | `agents/polish_contextualizer.py` | Przelicza zagraniczne realia na polską skalę. Znajduje polskie tematy do połączenia. Wskazuje gdzie szukać polskich ekspertów (bez wymyślania nazwisk!). |
-| **Kurator Popkultury** | `agents/popculture_curator.py` | Analogie z filmów, seriali, sportu, codzienności, memów. |
-| **Analityk Źródła** | `agents/source_analyst.py` | Ocenia wiarygodność badań: metodologia, próba, ograniczenia. Werdykt: MOCNE/UMIARKOWANE/SŁABE/WĄTPLIWE. |
-
-### Agenci kreatywni
-
-| Agent | Plik | Zadanie |
-|-------|------|---------|
-| **Archeolog Historii** | `agents/story_excavator.py` | Wydobywa narracje i dramaturgie ze źródła. Buduje posty fabularne. |
-| **Architekt Napięcia** | `agents/tension_architect.py` | Buduje napięcie narracyjne. Znajduje konflikt, punkt kulminacyjny, rozwiązanie. |
-| **Poszerzacz Kontekstu** | `agents/context_shifter.py` | Pogłębia wymiary: historyczny, społeczny, ekonomiczny, filozoficzny. |
-| **Komik** | `agents/comedian.py` | Znajduje okazje na humor. 5 poziomów "pokrętła humoru" od 1 (suchy) do 5 (absurdalny). |
-| **Inżynier Zaangażowania** | `agents/engagement.py` | Przekształca monologi w rozmowy. Tworzy CTA, pytania do odbiorców. |
-
-### Agenci recenzujący
-
-| Agent | Plik | Zadanie |
-|-------|------|---------|
-| **Adwokat Diabła** | `agents/devils_advocate.py` | Kwestionuje założenia. Znajduje słabe punkty. Zadaje niewygodne pytania. |
-| **Strażnik Głosu** | `agents/voice_guardian.py` | Wykrywa zombie-frazy, LinkedIn-speak. Sprawdza czy tekst brzmi autentycznie. |
-| **Snajper Otwarcia** | `agents/opening_sniper.py` | Specjalista od hooków. Zabija banały. Biblioteka formuł scroll-stopperów. |
-| **Wykrywacz Skazy** | `agents/vulnerability_scanner.py` | Szuka ludzkiej autentyczności. Czy autor zdejmuje zbroję eksperta? |
-
-### Agenci platformowi
-
-| Agent | Plik | Zadanie |
-|-------|------|---------|
-| **Agent LinkedIn** | `agents/linkedin_agent.py` | Formatuje pod LinkedIn. Profesjonalny ton, odpowiednia długość. |
-| **Agent Facebook** | `agents/facebook_agent.py` | Formatuje pod Facebook. Luźniejszy ton, emoji. |
-| **Agent Microblog** | `agents/microblog_agent.py` | X/Bluesky/Threads. Limity znaków (280/300/500). Wątki. |
-| **Agent Wideo** | `agents/video_agent.py` | Scenariusze do kamery. Reels (30-45s), Shorts (45-60s). |
-
-### Synteza
-
-| Agent | Plik | Zadanie |
-|-------|------|---------|
-| **Brief Synthesizer** | `agents/brief_synthesizer.py` | Tworzy podsumowanie z outputów wszystkich agentów. Dwufazowa architektura: tani model (Gemini Flash) do ekstrakcji, główny model do syntezy. |
+1. Otwórz Terminal
+2. Wejdź do folderu:
+   ```bash
+   cd analizator-tresci-social-media
+   ```
+3. Uruchom:
+   ```bash
+   ./start.sh
+   ```
+   (Windows: `venv\Scripts\activate` a potem `streamlit run app.py`)
 
 ---
 
-## Kluczowe zasady agentów
+# Rozwiązywanie problemów
 
-### 1. Buduj na źródle
-Każdy agent musi:
-- Cytować dosłownie ze źródła
-- Podawać osoby z imienia i nazwiska (jeśli są w źródle)
-- **Nie wymyślać** - tylko wyciągać
+## "python3: command not found"
+Nie masz zainstalowanego Pythona. Wróć do Kroku 2.
 
-### 2. Nie hallucynuj ekspertów
-Polski Kontekstualizator **nie podaje konkretnych nazwisk** ekspertów. Zamiast tego:
-- Typy ekspertów (naukowiec, praktyk, publicysta)
-- Instytucje gdzie szukać (uczelnie, fundacje, think-tanki)
-- Jak ich znaleźć (hashtagi, konferencje, publikacje)
+## "git: command not found"
+Nie masz zainstalowanego Git. Wróć do Kroku 3.
 
-### 3. Format JSON
-Większość agentów zwraca ustrukturyzowane dane JSON, nie luźny tekst. Ułatwia to:
-- Parsowanie przez inne agenty
-- Generowanie raportów HTML
-- Dalsze przetwarzanie
-
----
-
-## Struktura projektu
-
-```
-analizator-tresci-social-media/
-├── start.sh                # 🚀 Uruchom GUI (jedna komenda)
-├── start-cli.sh            # Uruchom CLI
-├── app.py                  # UI Streamlit
-├── run_v3.py               # CLI
-├── requirements.txt
-├── .env                    # ⚠️ Utwórz ręcznie (klucz API)
-│
-├── agents/                 # Agenci AI
-│   ├── orchestrator_v3.py  # Koordynator pipeline'u
-│   ├── extractor.py
-│   ├── anthropologist.py
-│   ├── polish_contextualizer.py
-│   ├── ... (pozostałe agenty)
-│
-├── core/                   # Moduły bazowe
-│   ├── config.py           # Konfiguracja modeli
-│   ├── openrouter.py       # Klient API
-│   ├── file_reader.py      # Czytnik plików
-│   ├── html_generator.py   # Generator raportów HTML
-│   └── agent_registry.py   # Rejestr agentów
-│
-├── posts/                  # 📁 Twoje pliki źródłowe (tworzy się automatycznie)
-├── output/                 # 📁 Wyniki analiz (tworzy się automatycznie)
-└── logs/                   # 📁 Logi (tworzy się automatycznie)
-```
-
----
-
-## Uruchomienie CLI (alternatywnie)
-
+## "No such file or directory"
+Nie jesteś w folderze projektu. Wpisz:
 ```bash
-./start-cli.sh
+cd analizator-tresci-social-media
 ```
 
-Lub ręcznie:
+## "OPENROUTER_API_KEY not found" lub "Brak kluczy API"
+Plik `.env` nie istnieje lub jest pusty. Wróć do Kroku 9.
 
-```bash
-source venv/bin/activate
-python run_v3.py
-```
+## "ModuleNotFoundError: No module named 'streamlit'"
+Środowisko wirtualne nie jest aktywne. Wpisz:
 
-CLI oferuje interaktywny wybór:
-1. Model AI
-2. Tryb (Eksploracja / Rozwinięcie / Szlif)
-3. Plik źródłowy
-4. Agenci do analizy
-5. Opcjonalnie: draft posta
-
----
-
-## Obsługiwane formaty plików
-
-| Format | Rozszerzenie | Uwagi |
-|--------|--------------|-------|
-| Tekst | `.txt` | UTF-8, CP1250, ISO-8859-2 |
-| Markdown | `.md` | GitHub-flavored |
-| Word | `.docx` | Wymaga `python-docx` |
-| PDF | `.pdf` | Wymaga `PyPDF2` |
-
----
-
-## Troubleshooting
-
-### "OPENROUTER_API_KEY not found"
-```bash
-echo "OPENROUTER_API_KEY=sk-or-v1-xxx" > .env
-```
-
-### "ModuleNotFoundError"
+**macOS:**
 ```bash
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Skrypt start.sh nie działa
+**Windows:**
+```bash
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+## "./start.sh: Permission denied"
+Wpisz:
 ```bash
 chmod +x start.sh
 ./start.sh
 ```
+
+## Przeglądarka się nie otworzy
+Skopiuj adres z terminala (np. `http://localhost:8501`) i wklej w przeglądarkę ręcznie.
+
+## "Error: Invalid API key"
+Klucz API jest nieprawidłowy. Sprawdź czy:
+- Skopiowałeś cały klucz (zaczyna się od `sk-or-v1-`)
+- Nie ma spacji przed ani po kluczu
+- Masz środki na koncie OpenRouter
+
+---
+
+# Informacje techniczne
+
+## Obsługiwane formaty plików
+
+| Format | Rozszerzenie |
+|--------|--------------|
+| Tekst | `.txt` |
+| Markdown | `.md` |
+| Word | `.docx` |
+| PDF | `.pdf` |
+
+## Struktura projektu
+
+```
+analizator-tresci-social-media/
+├── start.sh          # Uruchom GUI (macOS)
+├── app.py            # Interfejs graficzny
+├── .env              # Twój klucz API (tworzysz sam)
+├── .env.example      # Przykładowy plik konfiguracji
+├── agents/           # Agenci AI
+├── core/             # Moduły bazowe
+├── posts/            # Twoje pliki źródłowe
+└── output/           # Wyniki analiz
+```
+
+## Alternatywne klucze API
+
+Zamiast OpenRouter możesz użyć kluczy bezpośrednio od dostawców:
+
+| Klucz | Gdzie uzyskać | Obsługuje |
+|-------|---------------|-----------|
+| `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com/) | Claude |
+| `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com/api-keys) | GPT |
+| `GOOGLE_API_KEY` | [aistudio.google.com](https://aistudio.google.com/apikey) | Gemini |
 
 ---
 
