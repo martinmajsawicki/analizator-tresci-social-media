@@ -621,14 +621,13 @@ def render_draft_section(result: WorkflowResult, orchestrator: OrchestratorV3, c
         with st.spinner("Generuję draft..."):
             try:
                 draft_result = orchestrator.generate_draft(
-                    content=content,
-                    analysis_data=result.report,
+                    workflow_result=result,
                     platform_group=platform,
                     draft_format=draft_format,
                 )
 
-                if draft_result and draft_result.get("draft"):
-                    st.session_state.draft = draft_result["draft"]
+                if draft_result and draft_result.draft:
+                    st.session_state.draft = draft_result.draft
                     st.success("Draft wygenerowany!")
                 else:
                     st.error("Nie udało się wygenerować draftu")
@@ -641,11 +640,30 @@ def render_draft_section(result: WorkflowResult, orchestrator: OrchestratorV3, c
         draft = st.session_state.draft
 
         if isinstance(draft, dict):
-            if "text" in draft:
-                st.text_area("Treść", value=draft["text"], height=200)
-            if "thread" in draft:
-                for i, tweet in enumerate(draft["thread"], 1):
+            content = draft.get("content", {})
+
+            # LinkedIn / Facebook - mają full_post
+            if "full_post" in content:
+                st.text_area("Treść", value=content["full_post"], height=200)
+                if content.get("hashtags"):
+                    st.markdown("**Hashtagi:** " + " ".join(content["hashtags"]))
+                if content.get("hook_variants"):
+                    with st.expander("Alternatywne hooki"):
+                        for i, hook in enumerate(content["hook_variants"], 1):
+                            st.markdown(f"**{i}.** {hook}")
+            # Microblog - wątek
+            elif content.get("is_thread") and content.get("thread"):
+                for i, tweet in enumerate(content["thread"], 1):
                     st.markdown(f"**[{i}]** {tweet}")
+            # Microblog - pojedynczy post
+            elif "main_post" in content:
+                st.text_area("Treść", value=content["main_post"], height=200)
+                if content.get("hook_variants"):
+                    with st.expander("Alternatywne wersje"):
+                        for i, variant in enumerate(content["hook_variants"], 1):
+                            st.markdown(f"**{i}.** {variant}")
+            else:
+                st.text_area("Treść", value=str(draft), height=200)
         else:
             st.text_area("Treść", value=str(draft), height=200)
 
