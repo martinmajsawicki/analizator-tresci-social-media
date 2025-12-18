@@ -51,13 +51,27 @@ pip install -r requirements.txt
 
 ### 4. Skonfiguruj klucz API
 
-Utwórz plik `.env` w głównym katalogu:
+Utwórz plik `.env` w głównym katalogu. Potrzebujesz **przynajmniej jednego** klucza:
 
+**Opcja A: OpenRouter (uniwersalny - obsługuje wszystkie modele)**
 ```bash
 echo "OPENROUTER_API_KEY=sk-or-v1-twój-klucz" > .env
 ```
+Klucz uzyskasz na: https://openrouter.ai
 
-Klucz API uzyskasz na: https://openrouter.ai
+**Opcja B: Natywne API (bezpośrednio do dostawców)**
+```bash
+# Claude (Anthropic)
+ANTHROPIC_API_KEY=sk-ant-xxx
+
+# GPT (OpenAI)
+OPENAI_API_KEY=sk-xxx
+
+# Gemini (Google)
+GOOGLE_API_KEY=AIzaxxx
+```
+
+> **Priorytet:** Jeśli masz zarówno klucz natywny jak i OpenRouter, system automatycznie wybierze natywne API dla danego modelu (szybsze, bez pośrednika).
 
 ---
 

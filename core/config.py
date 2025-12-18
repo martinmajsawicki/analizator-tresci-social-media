@@ -214,25 +214,45 @@ Cenią krótką, wartościową treść.""",
 @dataclass
 class Config:
     """Main application configuration."""
-    api_key: str
+    openrouter_api_key: Optional[str] = None
+    anthropic_api_key: Optional[str] = None
+    openai_api_key: Optional[str] = None
+    google_api_key: Optional[str] = None
     default_model: str = "claude-opus-4.5"
     timeout: int = 120  # seconds - long timeout for complex analysis
     max_retries: int = 3
 
+    # Backward compatibility
+    @property
+    def api_key(self) -> str:
+        """Return OpenRouter API key for backward compatibility."""
+        return self.openrouter_api_key or ""
+
     @classmethod
     def from_env(cls) -> "Config":
         """Load configuration from environment variables."""
-        api_key = os.getenv("OPENROUTER_API_KEY")
-        if not api_key:
+        openrouter_key = os.getenv("OPENROUTER_API_KEY")
+        anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+        openai_key = os.getenv("OPENAI_API_KEY")
+        google_key = os.getenv("GOOGLE_API_KEY")
+
+        # Require at least one API key
+        if not any([openrouter_key, anthropic_key, openai_key, google_key]):
             raise ValueError(
-                "OPENROUTER_API_KEY not found. "
-                "Please set it in .env file or environment."
+                "Brak kluczy API. Ustaw przynajmniej jeden w pliku .env:\n"
+                "- OPENROUTER_API_KEY (uniwersalny - obsługuje wszystkie modele)\n"
+                "- ANTHROPIC_API_KEY (dla Claude - bezpośrednio)\n"
+                "- OPENAI_API_KEY (dla GPT - bezpośrednio)\n"
+                "- GOOGLE_API_KEY (dla Gemini - bezpośrednio)"
             )
 
         default_model = os.getenv("DEFAULT_MODEL", "claude-opus-4.5")
 
         return cls(
-            api_key=api_key,
+            openrouter_api_key=openrouter_key,
+            anthropic_api_key=anthropic_key,
+            openai_api_key=openai_key,
+            google_api_key=google_key,
             default_model=default_model,
         )
 
