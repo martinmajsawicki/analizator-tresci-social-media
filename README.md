@@ -1,4 +1,4 @@
-# Social Media Analyzer
+# Analizator Treści Social Media
 
 System agentowy AI do tworzenia treści social media - od eksploracji tematu po szlifowanie gotowych postów.
 
